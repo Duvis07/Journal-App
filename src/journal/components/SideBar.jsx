@@ -1,7 +1,14 @@
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { TurnedInNot } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+
+
+    //se desea obtener el nombre del usuario que esta autenticado para mostrarlo en el sidebar y se va a usar el hook useSelector
+    const { displayName } = useSelector( state => state.auth );
+
+
   return (
     <Box
         component='nav'
@@ -17,7 +24,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
         >
             <Toolbar>
                 <Typography variant='h6' noWrap component='div'>
-                    Duvan Botero
+                    { displayName }
                 </Typography>
             </Toolbar>
             <Divider />

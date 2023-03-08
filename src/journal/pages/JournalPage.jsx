@@ -5,6 +5,7 @@ import { AddOutlined } from "@mui/icons-material";
 import { JournalLayout } from "../layout/JournalLayout";
 import { NoteView, NothingSelectedView } from "../views";
 
+//Aca esta la vista de la pagina principal de la aplicacion donde se va a mostrar el componente de la nota seleccionada o el componente de no hay nota seleccionada
 export const JournalPage = () => {
   return (
     <JournalLayout>

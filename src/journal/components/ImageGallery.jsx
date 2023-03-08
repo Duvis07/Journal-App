@@ -1,6 +1,7 @@
 import { ImageListItem, ImageList } from '@mui/material';
 
 
+//aca estan todas las imagenes que se van a mostrar en las vistas de la aplicacion NoteView 
 export const ImageGallery = () => {
 
   return (

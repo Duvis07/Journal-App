@@ -2,6 +2,8 @@ import { StarOutline } from "@mui/icons-material";
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 
+
+//Aca esta la vista de nada seleccionado que se va a mostrar cuando no se seleccione ninguna nota o esta se haya vacido
 export const NothingSelectedView = () => {
   return (
     <Grid

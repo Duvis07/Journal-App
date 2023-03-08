@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 
+//Aca esta el layout de la autenticacion toda la parte de diseño  del login y el registro
 export const AuthLayout = ({ children, title = "" }) => {
   return (
     <Grid

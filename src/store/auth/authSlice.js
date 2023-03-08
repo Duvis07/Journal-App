@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//Modos de autenticación de usuarios en firebase y como se manejan en el proyecto de react js con redux y redux toolkit para manejar el estado de la aplicacion
 export const authSlice = createSlice({
   name: "auth",
   initialState: {

@@ -2,6 +2,10 @@ import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIco
 import { TurnedInNot } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 
+
+// el sidebar se va a mostrar en todas las vistas de la aplicacion menos en el login y el registro
+//este se va mostrar de forma vertical en la parte izquierda de la aplicacion y se va a mostrar el nombre del usuario que esta autenticado
+// y va a mostrar una lista de meses del año y cada mes va a tener un titulo y una descripcion o las notas que se hayan guardado en ese mes
 export const SideBar = ({ drawerWidth = 240 }) => {
 
 

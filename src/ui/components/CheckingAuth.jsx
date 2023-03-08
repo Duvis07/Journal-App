@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from '@mui/material';
 
-
+//cuando se esta cargando la aplicacion se muestra un circulo de carga cuando el usuario se esta autenticando por google o por correo y contraseña
 export const CheckingAuth = () => {
   return (
     <Grid

@@ -2,6 +2,8 @@ import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { ImageGallery } from "../components";
 
+
+//Aca esta la vista de la nota que se va a mostrar en la aplicacion cuando se haya creado una nota
 export const NoteView = () => {
   return (
     <Grid

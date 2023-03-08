@@ -9,7 +9,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Provider } from "react-redux";
 import { store } from "./store";
-
+// se llama a la aplicacion principal y se le pasa el store de redux para que pueda ser usado en toda la aplicacion
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>

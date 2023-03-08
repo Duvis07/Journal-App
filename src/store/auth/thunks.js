@@ -1,6 +1,9 @@
 import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/providers";
 import { checkingCredentials, login, logout } from "./authSlice";
 
+
+//se hace el dispatch de la accion checkingCredentials para cambiar el estado de la aplicacion a checking
+//se hace parte de la logica de la aplicacion con las funciones de firebase
 export const checkingAuthentication = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());

@@ -3,6 +3,7 @@ import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
 
+//Aca esta el navbar de la aplicacion que se va a mostrar en todas las vistas de la aplicacion menos en el login y el registro
 export const Navbar = ({ drawerWidth = 240 }) => {
   const dispatch = useDispatch();
 

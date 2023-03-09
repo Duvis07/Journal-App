@@ -19,15 +19,19 @@ import {
   startLoginWithEmailPassword,
 } from "../../store/auth/thunks";
 
+
+//se envia como argumento el objeto data que contiene el email y el password
+const data = {
+  email: "",
+  password: "",
+};
+
 export const LoginPage = () => {
   //
   const { status, errorMessage } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  const { email, password, onInputChange } = useForm({
-    email: "",
-    password: "",
-  });
+  const { email, password, onInputChange } = useForm(data);
 
   //va memorizar el valor de status y solo se va a volver a ejecutar cuando status cambie
   const isAuthenticating = useMemo(() => status === "checking", [status]);
@@ -46,7 +50,10 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={onSubmit} className="animate__animated animate__fadeIn animate__faster">
+      <form
+        onSubmit={onSubmit}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -72,18 +79,11 @@ export const LoginPage = () => {
             ></TextField>
           </Grid>
 
-          <Grid 
-              container
-              display={ !!errorMessage ? '': 'none' }
-              sx={{ mt: 1 }}>
-              <Grid 
-                  item 
-                  xs={ 12 }
-                >
-                <Alert severity='error'>{ errorMessage }</Alert>
-              </Grid>
+          <Grid container display={!!errorMessage ? "" : "none"} sx={{ mt: 1 }}>
+            <Grid item xs={12}>
+              <Alert severity="error">{errorMessage}</Alert>
             </Grid>
-
+          </Grid>
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
             <Grid item xs={12} sm={6}>

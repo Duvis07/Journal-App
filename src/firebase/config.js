@@ -20,7 +20,7 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 export const FirebaseAuth = getAuth(firebaseApp);
 
-export const FirebaseFirestore = getFirestore(firebaseApp);
+export const Firebase_DB = getFirestore(firebaseApp);
 
 //Aca se encuentra la configuracion de firebase para poder utilizarlo en el proyecto de react js y poder hacer uso de la base de datos
 //con firebasefirestore se puede hacer uso de la base de datos y con firebaseauth se puede hacer uso de la autenticacion de usuarios

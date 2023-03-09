@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 import { login, logout } from '../store/auth';
 import { FirebaseAuth } from '../firebase/config';
+import { startLoadingNotes } from '../store/journal';
 
 
 // Hook para verificar si el usuario esta autenticado o no y asi poder hacer uso de la autenticacion de usuarios
@@ -20,6 +21,8 @@ export const useCheckAuth = () => {
 
         const { uid, email, displayName, photoURL } = user;
         dispatch( login({ uid, email, displayName, photoURL }) );
+        //se cargan las notas del usuario en la aplicacion
+        dispatch( startLoadingNotes() );
         })
     }, []);
 

@@ -11,6 +11,12 @@ export const useForm = ( initialForm = {}, formValidations = {}) => {
     useEffect(() => {
         createValidators();
     }, [ formState ])
+
+
+    //se dispara cuando cambia el estado del formulario o el formstate para cambiar el estado de la fecha de creacion
+    useEffect(() => {
+        setFormState( initialForm );
+    }, [ initialForm ])
     
 
     //Quiero memorizar el estado del formulario para que no se vuelva a renderizar a menos que cambie el formstate

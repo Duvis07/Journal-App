@@ -2,6 +2,7 @@ import { SaveOutlined } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { useForm } from "../../hooks/useForm";
 import { setActiveNote, startSaveNote } from "../../store/journal";
 import { ImageGallery } from "../components";
@@ -11,7 +12,7 @@ export const NoteView = () => {
 
   const dispatch = useDispatch();
 
-  const { active: note } = useSelector((state) => state.journal);
+  const { active: note  , messageSaved } = useSelector((state) => state.journal);
 
   //se obtiene el body y el title de la nota seleccionada y se le pasa como argumento a la funcion useForm
   const { body, title, date, onInputChange, formState } = useForm(note);

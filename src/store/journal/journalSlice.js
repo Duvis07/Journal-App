@@ -61,11 +61,15 @@ export const journalSlice = createSlice({
 
             state.messageSaved = `${ action.payload.title }, actualizada correctamente`;
         },
+
+        //se agregan las fotos a la nota activa
+        //va mantener las fotos que ya tiene la nota y le va a agregar las nuevas fotos que se le pasan por parametro
         setPhotosToActiveNote: (state, action) => {
             state.active.imageUrls = [ ...state.active.imageUrls, ...action.payload ]; 
             state.isSaving = false;
         },
 
+        //se limpia el state de las notas y la nota activa cuando se hace logout de la app 
         clearNotesLogout: (state) => {
             state.isSaving = false;
             state.messageSaved = '';

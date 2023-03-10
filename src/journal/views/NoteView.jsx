@@ -1,10 +1,12 @@
-import { SaveOutlined } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
+
 import { useForm } from "../../hooks/useForm";
-import { setActiveNote, startSaveNote } from "../../store/journal";
+import { setActiveNote, startDeletingNote, startSaveNote, startUploadingFiles } from "../../store/journal";
 import { ImageGallery } from "../components";
 
 //Aca esta la vista de la nota que se va a mostrar en la aplicacion cuando se haya creado una nota
@@ -12,7 +14,7 @@ export const NoteView = () => {
 
   const dispatch = useDispatch();
 
-  const { active: note  , messageSaved } = useSelector((state) => state.journal);
+  const { active: note, messageSaved, isSaving } = useSelector((state) => state.journal);
 
   //se obtiene el body y el title de la nota seleccionada y se le pasa como argumento a la funcion useForm
   const { body, title, date, onInputChange, formState } = useForm(note);
@@ -23,33 +25,36 @@ export const NoteView = () => {
     return newDate.toUTCString();
   }, [date]);
 
-
+  //se crea una referencia para el input de tipo file en nuestro componente html
   const fileInputRef = useRef();
 
   //obtiene la nota activa y la guarda en el store de forma actualizada
+  //se dispara cuando cambia el formState y cuando cambia el messageSaved
   useEffect(() => {
-      dispatch( setActiveNote(formState) );
+    dispatch(setActiveNote(formState));
   }, [formState])
 
+  //si el messageSaved es mayor a 0, se muestra un mensaje de alerta con sweetalert2 o si no, no se muestra nada
   useEffect(() => {
-    if ( messageSaved.length > 0 ) {
-        Swal.fire('Nota actualizada', messageSaved, 'success');
+    if (messageSaved.length > 0) {
+      Swal.fire('Nota actualizada', messageSaved, 'success');
     }
   }, [messageSaved])
-  
-  
+
+
 
   const onSaveNote = () => {
-      dispatch( startSaveNote() );
+    dispatch(startSaveNote());
   }
 
+  // Si target.files es 0, no se hace nada, si no, se dispara la accion startUploadingFiles y se le pasa como argumento el target.files
   const onFileInputChange = ({ target }) => {
-      if( target.files === 0 ) return;
-      dispatch( startUploadingFiles( target.files ) );
+    if (target.files === 0) return;
+    dispatch(startUploadingFiles(target.files));
   }
 
   const onDelete = () => {
-      dispatch( startDeletingNote() );
+    dispatch(startDeletingNote());
   }
 
   return (
@@ -67,10 +72,29 @@ export const NoteView = () => {
         </Typography>
       </Grid>
       <Grid item>
+
+        <input
+          type="file"
+          multiple
+          ref={fileInputRef}
+          onChange={onFileInputChange}
+          style={{ display: 'none' }}
+        />
+
+        <IconButton
+          color="primary"
+          disabled={isSaving}
+          onClick={() => fileInputRef.current.click()}
+        >
+          <UploadOutlined />
+        </IconButton>
+
+
         <Button
-        onClick={onSaveNote}
-         color="primary" 
-         sx={{ padding: 2 }}>
+          disabled={isSaving}
+          onClick={onSaveNote}
+          color="primary"
+          sx={{ padding: 2 }}>
           <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
           Guardar
         </Button>
@@ -102,8 +126,21 @@ export const NoteView = () => {
         />
       </Grid>
 
+
+      <Grid container justifyContent='end'>
+        <Button
+          onClick={onDelete}
+          sx={{ mt: 2 }}
+          color="error"
+        >
+          <DeleteOutline />
+          Borrar
+        </Button>
+      </Grid>
+
+
       {/* Image gallery */}
-      <ImageGallery />
+      <ImageGallery images={note.imageUrls} />
     </Grid>
   );
 };

@@ -1,12 +1,14 @@
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { Firebase_DB } from "../../firebase/config";
-import { loadNotes } from "../../helpers";
+import { fileUpload, loadNotes } from "../../helpers";
 
 import {
   addNewEmptyNote,
+  deleteNoteById,
   savingNewNote,
   setActiveNote,
   setNotes,
+  setPhotosToActiveNote,
   setSaving,
   updateNote,
 } from "./journalSlice";
@@ -21,6 +23,7 @@ export const startNewNote = () => {
     const newNote = {
       title: "",
       body: "",
+      imageUrls: [],
       date: new Date().getTime(),
     };
 
@@ -66,12 +69,17 @@ export const startSaveNote = () => {
   };
 };
 
+//recibe un arreglo de archivos y los sube a cloudinary y retorna un arreglo de urls de las imagenes
+//fileUploadPromises es un arreglo de promesas que se van a ejecutar en paralelo y se espera a que todas se resuelvan para continuar con el codigo de la funcion
+//se utliza un for of para recorrer el arreglo de archivos y se va a ir agregando a fileUploadPromises una promesa por cada archivo
 export const startUploadingFiles = (files = []) => {
   return async (dispatch) => {
     dispatch(setSaving());
 
     // await fileUpload( files[0] );
+
     const fileUploadPromises = [];
+
     for (const file of files) {
       fileUploadPromises.push(fileUpload(file));
     }
